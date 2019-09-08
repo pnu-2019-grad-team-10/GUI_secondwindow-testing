@@ -3,11 +3,42 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QCoreApplication, Qt
+import random
+import numpy as np
 
+def analyzeKeystrokeData(filepath):
+	lines = None;
+	with open(filepath,"r",encoding="utf-8") as f:
+		lines = f.readlines();
+	ret = np.random.rand(5)
+	return ret
 
 class SelectGraph(object):
-       
+        
+    def __init__(self):
+            
+        self.app = QtWidgets.QApplication(sys.argv)
+        self.initUI2(MainWindow)
+        
     def initUI2(self, MainWindow) :
+
+
+        self.stylesheet = """
+        QPushButton{
+                background-color: #4e4e4e;
+                color: #ffffff;
+        }
+
+        QMainWindow{
+                background-color: #ff9900;
+        }
+
+        QTextEdit{
+                background-color: #ffffff;
+        }
+        """
+        self.app.setStyleSheet(self.stylesheet)
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -15,24 +46,38 @@ class SelectGraph(object):
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(40, 350, 121, 111))
         self.pushButton.setObjectName("pushButton")
+        
+        self.pushButton.clicked.connect(self.FirstButtonClicked)
+        
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(190, 350, 121, 111))
         self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(self.scdButtonClicked)
+        
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(340, 350, 121, 111))
         self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.clicked.connect(self.trdButtonClicked)
+        
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(490, 350, 121, 111))
         self.pushButton_4.setObjectName("pushButton_4")
+        self.pushButton_4.clicked.connect(self.frtButtonClicked)
+        
         self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_5.setGeometry(QtCore.QRect(640, 350, 121, 111))
         self.pushButton_5.setObjectName("pushButton_5")
+        self.pushButton_5.clicked.connect(self.fthButtonClicked)
+        
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(260, 130, 251, 81))
-        self.label.setMaximumSize(QtCore.QSize(251, 81))
-        self.label.setSizeIncrement(QtCore.QSize(10, 10))
+        self.label.setEnabled(True)
+        self.label.setGeometry(QtCore.QRect(120, 90, 551, 191))
+        font = QtGui.QFont()
+        font.setPointSize(36)
+        self.label.setFont(font)
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -44,77 +89,38 @@ class SelectGraph(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.menubar.addAction(self.menu.menuAction())
-
+ 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
+        percent = '59'
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "알콜분석기"))
         self.pushButton.setText(_translate("MainWindow", "타자"))
         self.pushButton_2.setText(_translate("MainWindow", "오타율"))
         self.pushButton_3.setText(_translate("MainWindow", "웅앵"))
         self.pushButton_4.setText(_translate("MainWindow", "어쩌구"))
         self.pushButton_5.setText(_translate("MainWindow", "저쩌구"))
-        self.label.setToolTip(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.SF NS Text\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:64pt;\">당신의 Alcohol 농도는</span><span style=\" font-size:64pt; font-weight:600;\"> ___ </span><span style=\" font-size:64pt;\">입니다 !!</span></p></body></html>"))
-        self.label.setText(_translate("MainWindow", "당신의 Alcohol 농도는 ___ 입니다 !!!!"))
+        self.label.setText(_translate("MainWindow", "당신의 Alcohol 농도는 " + percent +" % 입니다 !!!!"))
         self.menu.setTitle(_translate("MainWindow", "알콜분석"))
 
-
-'''
+    def FirstButtonClicked(self):
+        print('hello')
         
-        title = QLabel('Category',self)
-        title.setAlignment(Qt.AlignCenter)
-
-        font_t = title.font()                   #폰트 설정
-        font_t.setFamily('Times new Roman')
-        font_t.setBold(True)
-        font_t.setPointSize(14)
+    def scdButtonClicked(self):
+        QMessageBox.about(self, "message", "clicked")
         
-        title.setFont(font_t)
-        self.resize(600, 600)   
-        self.center()
-        #카테고리 선택
+    def trdButtonClicked(self):
+        QMessageBox.about(self, "message", "clicked")
+        
+    def frtButtonClicked(self):
+        QMessageBox.about(self, "message", "clicked")
+        
+    def fthButtonClicked(self):
+        QMessageBox.about(self, "message", "clicked")
+        
 
-        self.pushButton = QPushButton("file selection")
-        self.pushButton.clicked.connect(self.pushButtonCliked)
-        self.label = QLabel()
-
-        #그래프를 보여줄 지표 선택하기 
-        ct1 = QCheckBox('타수',self)
-        ct1.move(20, 20)
-        ct1.toggle()
-        #ct1.stateChanged.connect(self.changeTitle)
-
-        ct2 = QCheckBox('키입력시간',self)
-        ct2.move(20,30)
-        ct2.toggle()
-
-        ct3 = QCheckBox('오타율',self)
-        ct3.move(20,40)
-        ct3.toggle()
-
-        layout = QVBoxLayout()
-        layout.addWidget(self.pushButton)
-        layout.addWidget(self.label)
-        layout.addStretch(1)
-        self.setLayout(layout)
-
-    def pushButtonCliked(self):
-        items = ("상수1", "상수2", "상수3")
-        item, ok = QInputDialog.getItem(self, "파일선택.", "파일을 선택하세요.", items, 0, False)
-        if ok and item:
-            self.label.setText(item)
-    def center(self):               #창 중앙에 띄우기
-        qr = self.frameGeometry()
-        cp = QDesktopWidget().availableGeometry().center()
-        qr.moveCenter(cp)
-        self.move(qr.topLeft())  
-'''
 class MyApp(QWidget):
 
     def __init__(self):
