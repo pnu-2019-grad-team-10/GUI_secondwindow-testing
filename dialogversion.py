@@ -103,7 +103,7 @@ class MyApp(QWidget):
 
         uploadButton = QPushButton('등록')          #등록 버튼
         cancelButton = QPushButton('취소')          #취소 버튼
-        uploadButton.clicked.connect(self.Second)
+        #uploadButton.clicked.connect(self.Second)
 
         hbox = QHBoxLayout()                        #수평 박스
         hbox.addStretch(1)
@@ -147,6 +147,19 @@ class MyApp(QWidget):
                 data = f.read()
                 self.textEdit.setText(data)
 '''
+
+class MainWindow(QMainWindow):
+    def __init__(self, parent=None):
+        super(MainWindow,self).__init__(parent)
+        self.myApp = MyApp()
+        self.second = SelectGraph()
+    def firstWindow(self):
+        self.myApp.initUI()
+        
+    def secondWindow(self) :
+        self.second.initUI2()
+        self.myApp.uploadButton.clicked.connect(self.firstWindow)
+        self.show()
 
 
 if __name__ == '__main__':
