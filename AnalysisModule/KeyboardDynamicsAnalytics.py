@@ -13,8 +13,8 @@ def getFunctionValue(slope, intercept, target):
     
     
 def analyzeKeystrokeData(realpath):
-    pathheader = "\\".join(realpath.split("\\")[:-1]) + "\\"
-    filepath = realpath.split("\\")[-1]
+    pathheader = "\\".join(realpath.split("/")[:-1]) + "/"
+    filepath = realpath.split("/")[-1]
     print(filepath)
     filename = filepath.split(".")[0]
     convertKeyLog.convertLog(pathheader,filepath)
@@ -22,8 +22,9 @@ def analyzeKeystrokeData(realpath):
     PTP, PTR, BSP = keyLogStatics.acquireData(pathheader + convertedFilepath)
     keyPressConverter.acquireData(pathheader + convertedFilepath)
     LCS = lcs.compare(pathheader + 'converted-'+filename)
-    print(getFunctionValue(SLOPE_PTP,INTERCEPT_PTP,PTP),getFunctionValue(SLOPE_PTR,INTERCEPT_PTR,PTR), BSP, LCS)
-    return (getFunctionValue(SLOPE_PTP,INTERCEPT_PTP,PTP),getFunctionValue(SLOPE_PTR,INTERCEPT_PTR,PTR), BSP, LCS)
+    AVE = (getFunctionValue(SLOPE_PTP,INTERCEPT_PTP,PTP) + getFunctionValue(SLOPE_PTR,INTERCEPT_PTR,PTR)) / 2
+    print(AVE, getFunctionValue(SLOPE_PTP,INTERCEPT_PTP,PTP),getFunctionValue(SLOPE_PTR,INTERCEPT_PTR,PTR), PTP, PTR, BSP, LCS)
+    return (getFunctionValue(SLOPE_PTP,INTERCEPT_PTP,PTP),getFunctionValue(SLOPE_PTR,INTERCEPT_PTR,PTR), PTP, PTR, BSP, LCS)
     
 if __name__ == '__main__':
     import sys

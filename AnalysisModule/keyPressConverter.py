@@ -17,7 +17,6 @@ def acquireData(filename):
     count = 1
     for line in lines:
         lineVal = lineq.search(line)
-        print(count)
         count += 1
         if lineVal is None:
             continue

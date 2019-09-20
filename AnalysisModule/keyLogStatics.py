@@ -52,7 +52,6 @@ def acquireData(filename):
             if tempVal["type"] == 'P':
                 avePressToPressTime += currentTime - prevKeyPressTime
             else:
-                print(tempVal["content"] + ": " + str(currentTime)  + "/" + str(prevKeyPressTime) + "/" + str(currentTime - prevKeyPressTime))
                 avePressToReleaseTime += currentTime - prevKeyPressTime
         
         if tempVal["type"] == 'P':
