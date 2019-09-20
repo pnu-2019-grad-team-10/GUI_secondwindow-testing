@@ -445,6 +445,7 @@ class MainWindow(QMainWindow):
         self.second.initUI2(self)
         self.second.filePath = self.myApp.filepath
         self.second.backButton.clicked.connect(self.prevUI)
+        self.kda()
         self.show()
         
     def startUI(self):
@@ -460,7 +461,6 @@ class MainWindow(QMainWindow):
         self.myApp.filepath = fname[0]
 
             
-
     def cancelMethod(self):
         QMessageBox.question(self, "message", "취소하시겠습니까?", QMessageBox.Yes,  QMessageBox.Cancel)
         #if buttonReplay == QMessageBox.Yes:
@@ -469,6 +469,11 @@ class MainWindow(QMainWindow):
 
     def prevUI(self):
         self.startUI()
+
+    def kda(self) :
+        print(KDA.analyzeKeystrokeData(self.second.filePath))
+        
+        
 
     
 
