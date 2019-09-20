@@ -27,3 +27,4 @@ widgetChangeversion.py -> 첫번째 창에 등록을 누르며 창이 넘어가�
 9/20 5시
 
 뒤로가기 추가/ keboarddynamic 모듈에 filepath 전하기 위해 첫 화면에서 두번쨰 화면으로 filepath 인자 전달하느 것 까지 했습니다
+window5 봐주시길
