@@ -45,8 +45,6 @@ class SelectGraph(object):
         self.backButton = QtWidgets.QPushButton(self.centralwidget)
         self.backButton.setGeometry(QtCore.QRect(630, 480, 100, 50 ))
         self.backButton.setObjectName("Back")
-        #self.backButton.clicked.connect(self.PrevWindow)
-        #self.dialog = MyApp(show)
         
         
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -128,18 +126,15 @@ class MyApp(object):
         self.btn1 = QtWidgets.QPushButton(self.centralwidget)
         self.btn1.setGeometry(QtCore.QRect(300, 335, 211, 31))
         self.btn1.setObjectName("btn1")
-        #self.btn1.clicked.connect(executeFile.showDialog)
         
         self.uploadButton = QtWidgets.QPushButton(self.centralwidget)
         self.uploadButton.setGeometry(QtCore.QRect(310, 380, 87, 31))
         self.uploadButton.setObjectName("uploadButton")
-        #self.uploadButton.clicked.connect(self.Second)
         
         
         self.cancelButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.cancelButton_2.setGeometry(QtCore.QRect(410, 380, 86, 31))
         self.cancelButton_2.setObjectName("cancelButton_2")
-        #self.cancelButton_2.clicked.connect(self.cancelMethod)
         
         MainWindow.setCentralWidget(self.centralwidget)
         
@@ -177,9 +172,6 @@ class MyApp(object):
         self.btn1.setText(_translate("MainWindow", "파일 선택"))
         self.uploadButton.setText(_translate("MainWindow", "등록"))
         self.cancelButton_2.setText(_translate("MainWindow", "취소"))
-                   
-    def Second(self):
-        MainWindow.show()
 
 class FirstGraph(QMainWindow):
     def __init__(self):
@@ -451,6 +443,7 @@ class MainWindow(QMainWindow):
     def secondWindow(self) :
         
         self.second.initUI2(self)
+        self.second.filePath = self.myApp.filepath
         self.second.backButton.clicked.connect(self.prevUI)
         self.show()
         
@@ -464,6 +457,9 @@ class MainWindow(QMainWindow):
     def showDialog(self):       # 파일 선택 함수
         fname = QFileDialog.getOpenFileName(self, '파일 선택', './')
         self.myApp.text_2.setText(fname[0])
+        self.myApp.filepath = fname[0]
+
+            
 
     def cancelMethod(self):
         QMessageBox.question(self, "message", "취소하시겠습니까?", QMessageBox.Yes,  QMessageBox.Cancel)
