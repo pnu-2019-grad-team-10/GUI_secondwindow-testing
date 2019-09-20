@@ -663,7 +663,7 @@ QCheckBox::indicator:disabled, QRadioButton::indicator:disabled
         self.second.initUI2(self)
         self.second.pushButton_6.clicked.connect(self.startUI)
         self.show()
-        
+
     def startUI(self):
         self.myApp.initUI(self)
         self.myApp.uploadButton.clicked.connect(self.secondWindow)

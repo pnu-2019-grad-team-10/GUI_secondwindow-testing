@@ -13,14 +13,6 @@ import numpy as np
 from matplotlib.widgets import TextBox, Button
 
 
-
-def analyzeKeystrokeData(filepath):
-	lines = None;
-	with open(filepath,"r",encoding="utf-8") as f:
-		lines = f.readlines();
-	ret = np.random.rand(5)
-	return ret
-
 class SelectGraph(object):
       
     def initUI2(self, MainWindow) :
@@ -112,8 +104,7 @@ class MyApp(object):
 
 
     def initUI(self, MainWindow):
-        self.app = QtWidgets.QApplication(sys.argv)
-        
+        #self.app = QtWidgets.QApplication(sys.argv)
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -148,7 +139,7 @@ class MyApp(object):
         self.cancelButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.cancelButton_2.setGeometry(QtCore.QRect(410, 380, 86, 31))
         self.cancelButton_2.setObjectName("cancelButton_2")
-        self.cancelButton_2.clicked.connect(self.cancelMethod)
+        #self.cancelButton_2.clicked.connect(self.cancelMethod)
         
         MainWindow.setCentralWidget(self.centralwidget)
         
@@ -164,7 +155,6 @@ class MyApp(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.app.setStyleSheet("QWidget {background-color: #323232 }")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -187,12 +177,6 @@ class MyApp(object):
         self.btn1.setText(_translate("MainWindow", "파일 선택"))
         self.uploadButton.setText(_translate("MainWindow", "등록"))
         self.cancelButton_2.setText(_translate("MainWindow", "취소"))
-
-    def cancelMethod(self):
-        QMessageBox.question(self, "message", "취소하시겠습니까?", QMessageBox.Yes,  QMessageBox.Cancel)
-        #if buttonReplay == QMessageBox.Yes:
-            
-        #if buttonReplay == QMessageBox.Cancel:
                    
     def Second(self):
         MainWindow.show()
@@ -268,8 +252,9 @@ class MainWindow(QMainWindow):
         self.myApp = MyApp()
         self.second = SelectGraph()
         #self.secondWindow()
-        self.startUI()
         self.app = QtWidgets.QApplication(sys.argv)
+        self.app.setStyleSheet("QWidget {background-color: #323232 }")
+        self.startUI()
         self.stylesheet = """
                 
         QWidget
@@ -466,25 +451,31 @@ class MainWindow(QMainWindow):
     def secondWindow(self) :
         
         self.second.initUI2(self)
+        self.second.backButton.clicked.connect(self.prevUI)
         self.show()
-        
-        self.second.backButton.clicked.connect(self.PrevUI)
-        self.hide()
-        
         
     def startUI(self):
         self.myApp.initUI(self)
         self.myApp.uploadButton.clicked.connect(self.secondWindow)
         self.myApp.btn1.clicked.connect(self.showDialog)
+        self.myApp.cancelButton_2.clicked.connect(self.cancelMethod)
         self.show()
         
     def showDialog(self):       # 파일 선택 함수
         fname = QFileDialog.getOpenFileName(self, '파일 선택', './')
         self.myApp.text_2.setText(fname[0])
 
-    def PrevUI(self):
-        self.myApp.initUI(self)
-        self.show()
+    def cancelMethod(self):
+        QMessageBox.question(self, "message", "취소하시겠습니까?", QMessageBox.Yes,  QMessageBox.Cancel)
+        #if buttonReplay == QMessageBox.Yes:
+            
+        #if buttonReplay == QMessageBox.Cancel:
+
+    def prevUI(self):
+        self.startUI()
+
+    
+
 
         
 if __name__ == '__main__':
