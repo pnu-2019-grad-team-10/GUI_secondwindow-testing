@@ -84,7 +84,7 @@ class SelectGraph(object):
         global fpath
         global analysisResult
         analysisResult = KDA.analyzeKeystrokeData(fpath)
-        percent = str((analysisResult[0] + analysisResult[1])/2)
+        percent = ("%.3f" %((analysisResult[0] + analysisResult[1])/2))+
         
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Keystroke Dynamics Analytics"))
@@ -93,7 +93,7 @@ class SelectGraph(object):
         self.pushButton_3.setText(_translate("MainWindow", "Backspace"))
         self.pushButton_4.setText(_translate("MainWindow", "Typo"))
         self.backButton.setText(_translate("MainWindow", "Back"))
-        self.label.setText(_translate("MainWindow", "당신의 Alcohol 농도는  %.3f %% 입니다 !!!!" % percent))
+        self.label.setText(_translate("MainWindow", "당신의 Alcohol 농도는 " + percent + "% 입니다 !!!!"))
         self.menu.setTitle(_translate("MainWindow", "Keystroke Dynamics Analytics"))
 
     def FirstButtonClicked(self):
@@ -170,12 +170,12 @@ class MyApp(object):
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Times new Roman\'; font-size:14pt; font-weight:400; font-style:normal; font-bold:Ture\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> Key Daynamic Stroke</p></body></html>"))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> Keystroke Dynamic Analysis</p></body></html>"))
         self.text.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'Times new Roman\'; font-size:10pt; font-weight:400; font-style:normal; font-bold:Ture\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">                                                * Keystroke Dynamics Analytics *\n\n\n 혈중 알코올 농도에 따른 타자 패턴 분석 도구입니다.\n\n배부된 타자 연습 입력 결과 로그를 제출해주세요.\n\n\n\n\n\n\n                                                                                 - 부산대학교 2019년도 전기 졸업과제 10조</p></body></html>"))
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"> * Keystroke Dynamics Analysis * </p><br><p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">혈중 알코올 농도에 따른 타자 패턴 분석 도구입니다.</p><p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">배부된 타자 연습 입력 결과 로그를 제출해주세요.</p><br><br><p align=\"right\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">- 부산대학교 2019년도 전기 졸업과제 10조</p></body></html>"))
         self.text_2.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -468,8 +468,8 @@ class MainWindow(QMainWindow):
     def showDialog(self):       # 파일 선택 함수
         fname = QFileDialog.getOpenFileName(self, '파일 선택', './')
         self.myApp.text_2.setText(fname[0])
-        #global fpath
-        #fpath = fname[0]
+        global fpath
+        fpath = fname[0]
 
             
     def cancelMethod(self):

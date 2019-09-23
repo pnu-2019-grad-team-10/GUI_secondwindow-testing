@@ -13,7 +13,7 @@ def getFunctionValue(slope, intercept, target):
     
     
 def analyzeKeystrokeData(realpath):
-    pathheader = "".join(realpath.split("/")[:-1]) + "/"
+    pathheader = "/".join(realpath.split("/")[:-1]) + "/"
     filepath = realpath.split("/")[-1]
     print(filepath)
     filename = filepath.split(".")[0]
