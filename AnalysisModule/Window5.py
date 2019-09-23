@@ -12,6 +12,9 @@ from matplotlib import font_manager, rc
 import numpy as np
 from matplotlib.widgets import TextBox, Button
 
+#fpath = ""
+#analysisResult = None
+
 
 class SelectGraph(object):
       
@@ -73,7 +76,10 @@ class SelectGraph(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
     def retranslateUi(self, MainWindow):
-        percent = '59'
+        #global fpath
+        #analysisResult = KDA.analyzeKeystrokeData(fpath)
+        #percent = str((analysisResult[0] + analysisResult[1])/2)
+        percent = 0.9
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Keystroke Dynamics Analytics"))
         self.pushButton.setText(_translate("MainWindow", "Press-Press Time"))
@@ -91,7 +97,7 @@ class SelectGraph(object):
         self.next = FirstGraph()
         
     def trdButtonClicked(self):
-        self.next = FirstGraph()
+        self.label_2.setText(_translate("MainWindow", "TextLabel"))
         
     def frtButtonClicked(self):
         self.next = FirstGraph()
@@ -443,9 +449,8 @@ class MainWindow(QMainWindow):
     def secondWindow(self) :
         
         self.second.initUI2(self)
-        self.second.filePath = self.myApp.filepath
+        #self.second.filePath = self.myApp.filepath
         self.second.backButton.clicked.connect(self.prevUI)
-        self.kda()
         self.show()
         
     def startUI(self):
@@ -457,8 +462,9 @@ class MainWindow(QMainWindow):
         
     def showDialog(self):       # 파일 선택 함수
         fname = QFileDialog.getOpenFileName(self, '파일 선택', './')
+        #global fpath
+        #fpath = fname[0]
         self.myApp.text_2.setText(fname[0])
-        self.myApp.filepath = fname[0]
 
             
     def cancelMethod(self):
