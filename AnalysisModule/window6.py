@@ -84,7 +84,7 @@ class SelectGraph(object):
         global fpath
         global analysisResult
         analysisResult = KDA.analyzeKeystrokeData(fpath)
-        percent = ("%.3f" %((analysisResult[0] + analysisResult[1])/2))+
+        percent = ("%.3f" %((analysisResult[0] + analysisResult[1])/2))
         
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Keystroke Dynamics Analytics"))

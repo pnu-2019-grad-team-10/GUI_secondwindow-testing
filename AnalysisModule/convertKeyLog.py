@@ -6,7 +6,7 @@ def convertLog(pathheader,target):
     kf.initENG();
     kf.initKOR();
     kf.initKSH();
-    f = open(target,"r",encoding="utf-8")
+    f = open(pathheader + target,"r",encoding="utf-8")
     lines = f.readlines()
     prevkeyboard = 'KOR'
     for line in lines:
