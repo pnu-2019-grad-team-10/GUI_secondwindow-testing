@@ -12,8 +12,8 @@ from matplotlib import font_manager, rc
 import numpy as np
 from matplotlib.widgets import TextBox, Button
 
-#fpath = ""
-#analysisResult = None
+fpath = ""
+analysisResult = None
 
 class SelectGraph(object):
       
@@ -81,12 +81,11 @@ class SelectGraph(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
     def retranslateUi(self, MainWindow):
-        #global fpath
-        #global analysisResult
-        #analysisResult = KDA.analyzeKeystrokeData(fpath)
-        #percent = str((analysisResult[0] + analysisResult[1])/2)
+        global fpath
+        global analysisResult
+        analysisResult = KDA.analyzeKeystrokeData(fpath)
+        percent = str((analysisResult[0] + analysisResult[1])/2)
         
-        percent = '59'
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Keystroke Dynamics Analytics"))
         self.pushButton.setText(_translate("MainWindow", "Press-Press Time"))
@@ -94,7 +93,7 @@ class SelectGraph(object):
         self.pushButton_3.setText(_translate("MainWindow", "Backspace"))
         self.pushButton_4.setText(_translate("MainWindow", "Typo"))
         self.backButton.setText(_translate("MainWindow", "Back"))
-        self.label.setText(_translate("MainWindow", "당신의 Alcohol 농도는 " + percent +" % 입니다 !!!!"))
+        self.label.setText(_translate("MainWindow", "당신의 Alcohol 농도는  %.3f %% 입니다 !!!!" % percent))
         self.menu.setTitle(_translate("MainWindow", "Keystroke Dynamics Analytics"))
 
     def FirstButtonClicked(self):
