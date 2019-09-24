@@ -100,13 +100,15 @@ class SelectGraph(object):
         self.next = FirstGraph()
         
     def scdButtonClicked(self):
-        self.next = FirstGraph()
+        self.next = SecondGraph()
         
     def trdButtonClicked(self):
-        self.label2.setText("TextLabel")
+        global analysisResult
+        self.label2.setText("당신의 Backspace 입력 횟수는 " + str(analysisResult[4])+ "회입니다.")
 
     def frtButtonClicked(self):
-        self.next = FirstGraph()
+        global analysisResult
+        self.label2.setText("당신의 Typo Error 발생 횟수는 " + str(analysisResult[5]) + "회입니다.")
 
 
 
@@ -193,12 +195,13 @@ class FirstGraph(QMainWindow):
     def initGr1(self) :
         fig, ax = plt.subplots()            #그래프 
         plt.subplots_adjust(bottom=0.35)
-        initial_text = "Your PTP is 343.22ms, which is estimated to 0.125 Alcohol-in-blood percentage."
+        global analysisResult
+        initial_text = "Your PTP is " + ("%.3f" % analysisResult[2]) + "ms, estimated to " + ("%.3f" % analysisResult[0]) + " Alcohol-in-blood percentage."
 
-        a = np.arange(0, 2, 0.2)        #범위
+        a = np.arange(0, 600, 50)        #범위
 
-        x = [1.0]                       #반환 값 
-        y = [1.0]
+        x = [analysisResult[2]]                       #반환 값 
+        y = [analysisResult[0]]
 
         font_name = font_manager.FontProperties(fname="C:/Windows/Fonts/NanumGothic.ttf").get_name()
         rc('font', family=font_name)
@@ -212,7 +215,7 @@ class FirstGraph(QMainWindow):
         plt.yticks(fontsize = 12, color = '#FF8000')
 
         plt.scatter(x, y, c = 'b', s = 150, marker="*", label = 'dot')   #점 그래프
-        plt.plot(a, a**2, color='#FF8000', linewidth=2, label = 'line graph')   #선 그래프 
+        plt.plot([0,534.541],[0.170274,0], color='#FF8000', linewidth=2, label = 'line graph')   #선 그래프 
         plt.grid(b=True, which ='major', axis='x')      #그리드 그리기
 
 
@@ -224,7 +227,7 @@ class FirstGraph(QMainWindow):
         }
 
 
-        plt.text(1.05, 0.8, 'Your PTP : 343.22ms', bbox = box)
+        plt.text(1.05, 0.8, 'Your PTP: ' + ("%.3f" % analysisResult[2]) + "ms", bbox = box)
 
         #텍스트 박스 
         axbox = plt.axes([0.1, 0.16, 0.8, 0.09])
@@ -247,6 +250,68 @@ class FirstGraph(QMainWindow):
 
         plt.show()
 
+class SecondGraph(QMainWindow):
+    def __init__(self):
+            
+        self.initGr1()
+        
+    def initGr1(self) :
+        fig, ax = plt.subplots()            #그래프 
+        plt.subplots_adjust(bottom=0.35)
+        global analysisResult
+        initial_text = "Your PTR is " + ("%.3f" % analysisResult[3]) + "ms, estimated to " + ("%.3f" % analysisResult[1])+ " Alcohol-in-blood percentage."
+
+        a = np.arange(0, 600, 50)        #범위
+
+        x = [analysisResult[3]]                       #반환 값 
+        y = [analysisResult[1]]
+
+        font_name = font_manager.FontProperties(fname="C:/Windows/Fonts/NanumGothic.ttf").get_name()
+        rc('font', family=font_name)
+
+
+        fig.suptitle("타자 속도", fontsize = 16, fontweight='bold')     #타이틀제목
+        plt.xlabel("x")    #x축 라벨
+        plt.ylabel("y")    #y축 라벨
+
+        plt.xticks(fontsize = 12, color = '#FF8000')          #눈금 색, 폰트크기
+        plt.yticks(fontsize = 12, color = '#FF8000')
+
+        plt.scatter(x, y, c = 'b', s = 150, marker="*", label = 'dot')   #점 그래프
+        plt.plot([0,126.35],[0.1640483,0], color='#FF8000', linewidth=2, label = 'line graph')   #선 그래프 
+        plt.grid(b=True, which ='major', axis='x')      #그리드 그리기
+
+
+        #박스 설정
+        box = {
+            'facecolor' : '.85',
+            'edgecolor' : 'r',
+            'boxstyle'  : 'round'
+        }
+
+
+        plt.text(1.05, 0.8, 'Your PTR: ' + ("%.3f" % analysisResult[1]) + "ms", bbox = box)
+
+        #텍스트 박스 
+        axbox = plt.axes([0.1, 0.16, 0.8, 0.09])
+        text_box = TextBox(axbox, '', initial=initial_text)
+
+
+        ''' 화살표 표시(error)
+        plt.plot([1.0], [1.0])
+        plt.annotate('Your PTP : 343.22ms' xy=(1.0, 1.0), xytext=(0.7, 0.8),
+                    arrowprops=dict(facecolor='black', shrink=0.01),
+                    )
+        '''
+
+        #callback = Prev()
+        #axprev = plt.axes([0.80, 0.05, 0.1, 0.075])
+        #bprev = Button(axprev, 'Previous')
+        #bprev.on_clicked(callback.prev)
+
+        #plt.legend()
+
+        plt.show()
    
 class MainWindow(QMainWindow):
     
